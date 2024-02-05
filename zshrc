@@ -1,0 +1,29 @@
+source antigen.zsh 
+
+setopt histignorealldups sharehistory
+
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zsh_history
+
+# Load the oh-my-zsh's library.
+# antigen use oh-my-zsh
+
+# load plugins
+antigen bundle git
+# antigen bundle nodem
+# antigen bundle npm
+antigen bundle zsh-users/zsh-autosuggestions
+# antigen bundle zdharma-continuum/fast-syntax-highlighting
+# antigen bundle djui/alias-tips
+
+antigen theme robbyrussell
+
+# Tell Antigen that you're done
+antigen apply
+
+#find in file
+ fif() {     if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi;     local file;     file="$(rg --max-count=1 --ignore-case --files-with-matches --no-messages "$@" | fzf-tmux +m --preview="rg --ignore-case --pretty --context 10 '"$@"' {}")" && open "$file"; }
+
+export PAGER=most
